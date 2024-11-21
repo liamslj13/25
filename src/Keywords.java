@@ -16,6 +16,10 @@ class Keywords {
         KEYWORDS.put("try", TokenType.TRY);
         KEYWORDS.put("catch", TokenType.CATCH);
         KEYWORDS.put("null", TokenType.NULL);
+        KEYWORDS.put("false", TokenType.BOOL);
+        KEYWORDS.put("true", TokenType.BOOL);
+        KEYWORDS.put("const", TokenType.CONST);
+        KEYWORDS.put("var", TokenType.VAR);
     }
     public static TokenType getTokenType(String keyword) {
         return KEYWORDS.get(keyword);

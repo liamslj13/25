@@ -28,5 +28,6 @@ enum NodeType {
     ARRAYLITERAL, //            -X
     STRINGLITERAL, //           -X
     NULLLITERAL, //             -X
+    BOOLLITERAL, //             -X
 
 }

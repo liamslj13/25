@@ -42,10 +42,11 @@ enum TokenType {
      * THE LEXER IMPLEMENTATION WILL BE DENOTED BY AN 'X'.
      */
 
-    //Identifier
+    //frontend.Identifier
     INT, //                     -X
     FLOAT, //                   -X
     IDENTIFIER, //              -X
+    BOOL, //                    -X
 
     //Operators * Grouping
     EQUALS, // =                -X
@@ -91,6 +92,10 @@ enum TokenType {
     NOT, //Boolean negation
     TRY, //Try block
     CATCH, //Catch error
+
+    //Variable declaration
+    CONST, //Is constant?
+    VAR, // Isn't constant?
 
     //***COMMENTS***//
     // ">>" FOR SINGLE LINE

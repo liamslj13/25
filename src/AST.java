@@ -33,8 +33,22 @@ class VariableDeclaration extends Stmt {
         return identifier;
     }
 
+    public String identifierToString() {
+        return identifier.getSymbol();
+    }
+
     public Expr getValue() {
         return value;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
+
+    @Override
+    public String toString() {
+        return "isConstant: " + constant + "\nIdentifier: " + identifier + "\nValue: " + value;
     }
 }
 
@@ -61,6 +75,11 @@ class FuncDeclaration extends Stmt {
     public List<String> getBody() {
         return body;
     }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
 }
 
 class IfStatement extends Stmt {
@@ -73,6 +92,15 @@ class IfStatement extends Stmt {
         this.test = test;
         this.body = body;
         this.alternate = alternate;
+    }
+
+    public Expr getTest() {
+        return test;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 }
 
@@ -92,6 +120,11 @@ class TryCatchStatement extends Stmt {
 
     public List<Stmt> getAlternate() {
         return alternate;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 
     @Override
@@ -118,6 +151,23 @@ class ForStatement extends Stmt {
     public List<Stmt> getBody() {
         return body;
     }
+
+    public Expr getTest() {
+        return test;
+    }
+
+    public AssignmentExpr getUpdate() {
+        return update;
+    }
+
+    public VariableDeclaration getInit() {
+        return init;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
 }
 
 class WhileStatement extends Stmt {
@@ -130,8 +180,17 @@ class WhileStatement extends Stmt {
         this.body = body;
     }
 
+    public Expr getTest() {
+        return test;
+    }
+
     public List<Stmt> getBody() {
         return body;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 }
 
@@ -149,6 +208,11 @@ class Program extends Stmt {
 
     public List<Stmt> getBody() {
         return body;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 
     @Override
@@ -178,6 +242,19 @@ class AssignmentExpr extends Expr {
         super(NodeType.ASSIGNMENTEXPR);
         this.assignee = assignee;
         this.value = value;
+    }
+
+    public Expr getAssignee() {
+        return assignee;
+    }
+
+    public Expr getValue() {
+        return value;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 
     @Override
@@ -211,6 +288,11 @@ class BinaryExpr extends Expr {
     }
 
     @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
+
+    @Override
     public String toString() {
         return "Left: (" + left + "), right: (" + right + "), operator: (" + operator + ")";
     }
@@ -232,6 +314,11 @@ class CallExpr extends Expr {
 
     public Expr getCaller() {
         return caller;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 
     @Override
@@ -265,6 +352,11 @@ class MemberExpr extends Expr {
     }
 
     @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
+
+    @Override
     public String toString() {
         return "MemberExpr, object: " + object + ", property: " + property + ", is computed? " + computed;
     }
@@ -277,6 +369,15 @@ class Identifier extends Expr {
     public Identifier(String symbol) {
         super(NodeType.IDENTIFIER);
         this.symbol = symbol;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 
     @Override
@@ -298,6 +399,11 @@ class IntLiteral extends Expr {
     }
 
     @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
+
+    @Override
     public String toString() {
         return "IntLiteral: " + value;
     }
@@ -316,8 +422,36 @@ class FloatLiteral extends Expr {
     }
 
     @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
+
+    @Override
     public String toString() {
         return "FloatLiteral: " + value;
+    }
+}
+
+class BoolLiteral extends Expr {
+    private final boolean value;
+
+    public BoolLiteral(Boolean value) {
+        super(NodeType.BOOLLITERAL);
+        this.value = value;
+    }
+
+    public boolean getValue() {
+        return value;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
+
+    @Override
+    public String toString() {
+        return "BoolLiteral: " + value;
     }
 }
 
@@ -338,8 +472,13 @@ class ObjLiteral extends Expr {
     }
 
     @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
+
+    @Override
     public String toString() {
-        return "ArrayLiteral: " + properties;
+        return "Object Literal: " + properties;
     }
 }
 
@@ -353,6 +492,11 @@ class ArrayLiteral extends Expr {
 
     public List<Expr> getValues() {
         return values;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 
     @Override
@@ -374,6 +518,11 @@ class StringLiteral extends Expr {
     }
 
     @Override
+    public NodeType getKind() {
+        return super.getKind();
+    }
+
+    @Override
     public String toString() {
         return "StringLiteral: " + value;
     }
@@ -389,6 +538,11 @@ class NullLiteral extends Expr {
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public NodeType getKind() {
+        return super.getKind();
     }
 
     @Override
