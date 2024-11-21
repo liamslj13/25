@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class lexer {
+class Lexer {
     //Determine if char is valid int
     public static boolean isInt(String str) {
         char c = str.charAt(0);
@@ -163,7 +163,7 @@ public class lexer {
                             }
                             //Check for some reserved keywords
                             String ident = identifier.toString().toLowerCase();
-                            TokenType reserved = keywords.getTokenType(ident);
+                            TokenType reserved = Keywords.getTokenType(ident);
                             if (reserved != null) {
                                 tokens.add(new Token(reserved, ident));
                             } else {

@@ -1,4 +1,4 @@
-enum nodetype {
+enum NodeType {
 
     /*
      * FOR EASE OF ORGANIZATION, NODES ALREADY HANDLED

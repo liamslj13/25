@@ -1,7 +1,8 @@
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
-class keywords {
+
+class Keywords {
     private static final Map<String, TokenType> KEYWORDS = new HashMap<>();
     static {
         KEYWORDS.put("if", TokenType.IF);
