@@ -25,6 +25,7 @@ enum NodeType {
     INTLITERAL, //              -X
     FLOATLITERAL, //            -X
     OBJLITERAL, //              -X
+    PROPERTY, //                -X
     ARRAYLITERAL, //            -X
     STRINGLITERAL, //           -X
     NULLLITERAL, //             -X
