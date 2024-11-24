@@ -413,7 +413,7 @@ class FloatLiteral extends Expr {
     private final float value;
 
     public FloatLiteral(float value) {
-        super(NodeType.INTLITERAL);
+        super(NodeType.FLOATLITERAL);
         this.value = value;
     }
 
@@ -456,7 +456,10 @@ class BoolLiteral extends Expr {
 }
 
 // =================================================================== //
-record Property(String key, Expr value) {}
+class Property(String key, Expr value) {
+
+
+}
 // =================================================================== //
 
 class ObjLiteral extends Expr {

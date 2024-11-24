@@ -17,17 +17,10 @@ class Lexer {
     public static boolean isSkippable(String str) {
         return str.equals(" ") || str.equals("\n") || str.equals("\t") || str.equals("\r");
     }
-    /*
-     * This function looks at each character in the source code
-     * and decides what category of token to put it into.
-     *
-     * @param source code
-     * @return tokenized source code
-     */
+
     public List<Token> tokenize(String sourceCode)  {
         List<Token> tokens = new ArrayList<>();
-        //We need dynamic arrays, so our tokens and src code must be declared
-        //as ArrayLists as opposed to regular array (similar to C++ vectors).
+
         ArrayList<String> src = new ArrayList<>();
 
         //Split src into chars -> add into array
