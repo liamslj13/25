@@ -462,9 +462,6 @@ class Property extends Expr {
     private String key;
     private Expr value;
 
-    public Property() {
-        super(NodeType.PROPERTY);
-    }
     public Property(String key) {
         super(NodeType.PROPERTY);
         this.key = key;
