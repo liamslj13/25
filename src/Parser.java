@@ -10,6 +10,7 @@ public class Parser {
         this.tokens.remove(0);
         return prev;
     }
+
     private boolean notEOF() {
         return this.tokens.get(0).type != TokenType.EOF;
     }
@@ -22,7 +23,7 @@ public class Parser {
         this.tokens = lexer.tokenize(sourceCode);
         List<Stmt> statements = new ArrayList<>();
 
-        while(this.notEOF()) {
+        while (this.notEOF()) {
             statements.add(this.parseStmt());
         }
 
@@ -57,23 +58,34 @@ public class Parser {
         ArrayList<Property> properties = new ArrayList<>();
 
         while (this.notEOF() && this.at().type != TokenType.CLOSEBRACE) {
-            String key = Objects.requireNonNull(
-                    this.expect(TokenType.IDENTIFIER,
-                            "Expected object literal key.")
-            ).value;
 
+            String key = this.expect(TokenType.IDENTIFIER, "Expected object literal key.").value;
+
+            // key : -> { key, ... } No value specified
             if (this.at().type == TokenType.COMMA) {
                 this.eat();
-                properties.add(new Property(key, null));
+                properties.add(new Property(key));
+                continue;
             } else if (this.at().type == TokenType.CLOSEBRACE) {
-                properties.add(new Property(key, null));
+                properties.add(new Property(key));
+                continue;
             }
-            this.expect(TokenType.COLON,
-                    "Missing colon following identifier in object expression.");
-            //value =
-
+            // represents {key : value} structure
+            this.expect(
+                    TokenType.COLON,
+                    "Missing colon following identifier in ObjectExpr."
+            );
+            Expr value = this.parseExpr();
+            properties.add(new Property(key, value));
+            if (this.at().type != TokenType.CLOSEBRACE) {
+                this.expect(
+                        TokenType.COMMA,
+                        "Expected comma or closing bracket following previous property."
+                );
+            }
         }
-        return null;
+        this.expect(TokenType.CLOSEBRACE, "Object literal missing closing brace");
+        return new ObjLiteral(properties);
     }
 
     private Expr parseArrayExpr() {
@@ -86,7 +98,7 @@ public class Parser {
 
         while (this.notEOF() && this.at().type != TokenType.CLOSEBRACKET) {
             values.add(this.parseExpr());
-            if(this.at().type != TokenType.CLOSEBRACKET) {
+            if (this.at().type != TokenType.CLOSEBRACKET) {
                 this.expect(TokenType.COMMA, "Expected comma (\",\") or closing bracket (\"]\") after array element.");
             }
         }
@@ -133,7 +145,7 @@ public class Parser {
     }
 
     private Expr parseAssignmentExpr() {
-        Expr left =  this.parseAdditiveExpr();
+        Expr left = this.parseAdditiveExpr();
 
         if (this.at().type == TokenType.EQUALS) {
             this.eat();

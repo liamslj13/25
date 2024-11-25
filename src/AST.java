@@ -455,10 +455,44 @@ class BoolLiteral extends Expr {
     }
 }
 
-// =================================================================== //
-class Property(String key, Expr value) {
+/* =================================================================== //
+                     For use with the Obj Constructs
+// =================================================================== */
+class Property extends Expr {
+    private String key;
+    private Expr value;
 
+    public Property(String key) {
+        super(NodeType.PROPERTY);
+        this.key = key;
+    }
 
+    public Property(String key, Expr value) {
+        super(NodeType.PROPERTY);
+        this.key = key;
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Key: " + key +", Value: " + value;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public Expr getValue() {
+        return value;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public void setValue(Expr value) {
+        this.value = value;
+    }
 }
 // =================================================================== //
 
